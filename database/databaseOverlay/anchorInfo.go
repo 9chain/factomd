@@ -161,13 +161,14 @@ func AnchorRecordToDirBlockInfo(ar *anchor.AnchorRecord) (*dbInfo.DirBlockInfo, 
 		}
 		dbi.BTCConfirmed = true
 	} else if ar.Ethereum != nil {
-		dbi.BTCTxHash, err = primitives.NewShaHashFromStr(ar.Ethereum.TXID)
+		dbi.BTCTxHash, err = primitives.NewShaHashFromStr(ar.Ethereum.TXID[2:])
+
 		if err != nil {
 			return nil, err
 		}
 		dbi.BTCTxOffset = int32(ar.Ethereum.Offset)
 		dbi.BTCBlockHeight = int32(ar.Ethereum.BlockHeight)
-		dbi.BTCBlockHash, err = primitives.NewShaHashFromStr(ar.Ethereum.BlockHash)
+		dbi.BTCBlockHash, err = primitives.NewShaHashFromStr(ar.Ethereum.BlockHash[2:])
 		if err != nil {
 			return nil, err
 		}

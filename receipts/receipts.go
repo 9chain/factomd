@@ -387,6 +387,7 @@ func CreateReceipt(dbo interfaces.DBOverlaySimple, entryID interfaces.IHash) (*R
 	if dirBlockInfo != nil {
 		dbi := dirBlockInfo.(*dbInfo.DirBlockInfo)
 
+		fmt.Printf("************* DirBlockInfo - %v\n\n", dbi)
 		receipt.BitcoinTransactionHash = dbi.BTCTxHash.(*primitives.Hash)
 		receipt.BitcoinBlockHash = dbi.BTCBlockHash.(*primitives.Hash)
 	}
