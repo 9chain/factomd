@@ -82,6 +82,9 @@ func NewInternalDatabaseError() *primitives.JSONError {
 func NewBlockNotFoundError() *primitives.JSONError {
 	return primitives.NewJSONError(-32008, "Block not found", nil)
 }
+func NewBlockInfoNotFoundError() *primitives.JSONError {
+	return primitives.NewJSONError(-32008, "Block info not found", nil)
+}
 func NewEntryNotFoundError() *primitives.JSONError {
 	return primitives.NewJSONError(-32008, "Entry not found", nil)
 }

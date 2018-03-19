@@ -140,6 +140,11 @@ var (
 		Help: "Time it takes to compelete a dblockbyheight",
 	})
 
+	HandleV2APICallDBlockInfoByHeight = prometheus.NewSummary(prometheus.SummaryOpts{
+		Name: "factomd_wsapi_v2_api_call_dblockinfobyheight_ns",
+		Help: "Time it takes to compelete a dblockinfobyheight",
+	})
+
 	HandleV2APICallECBlockByHeight = prometheus.NewSummary(prometheus.SummaryOpts{
 		Name: "factomd_wsapi_v2_api_call_ecblockbyheight_ns",
 		Help: "Time it takes to compelete a ecblockbyheight",

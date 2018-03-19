@@ -155,6 +155,9 @@ func HandleV2Request(state interfaces.IState, j *primitives.JSON2Request) (*prim
 	case "dblock-by-height":
 		resp, jsonError = HandleV2DBlockByHeight(state, params)
 		break
+	case "directory-blockinfo-by-height":
+		resp, jsonError = HandleV2DBlockInfoByHeight(state, params)
+		break
 	case "ecblock-by-height":
 		resp, jsonError = HandleV2ECBlockByHeight(state, params)
 		break
@@ -218,6 +221,45 @@ func HandleV2DBlockByHeight(state interfaces.IState, params interface{}) (interf
 	}
 	resp.DBlock = b
 	resp.RawData = hex.EncodeToString(raw)
+
+	return resp, nil
+}
+
+func HandleV2DBlockInfoByHeight(state interfaces.IState, params interface{}) (interface{}, *primitives.JSONError) {
+	n := time.Now()
+	defer HandleV2APICallDBlockInfoByHeight.Observe(float64(time.Since(n).Nanoseconds()))
+
+	heightRequest := new(HeightRequest)
+	err := MapToObject(params, heightRequest)
+	if err != nil {
+		return nil, NewInvalidParamsError()
+	}
+
+	dbase := state.GetAndLockDB()
+	defer state.UnlockDB()
+
+	block, err := dbase.FetchDBlockByHeight(uint32(heightRequest.Height))
+	if err != nil {
+		return nil, NewInternalDatabaseError()
+	}
+	if block == nil {
+		return nil, NewBlockNotFoundError()
+	}
+
+	keyMR := block.GetKeyMR()
+	if keyMR == nil {
+		return nil, NewInternalDatabaseError()
+	}
+
+	blockInfo, err := dbase.FetchDirBlockInfoByKeyMR(keyMR)
+	if err != nil {
+		return nil, NewBlockInfoNotFoundError()
+	}
+
+	resp, err := ObjectToJStruct(blockInfo)
+	if err != nil {
+		return nil, NewInternalError()
+	}
 
 	return resp, nil
 }
