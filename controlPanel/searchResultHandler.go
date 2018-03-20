@@ -23,6 +23,7 @@ import (
 	"github.com/FactomProject/factomd/receipts"
 	"bytes"
 	"io/ioutil"
+	"os"
 )
 
 var _ = htemp.HTMLEscaper("sdf")
@@ -126,7 +127,12 @@ func HandleSearchResult(content *SearchedStruct, w http.ResponseWriter) {
 			break
 		}
 
-		url := "http://192.168.100.126:18545"
+		url :=  os.Getenv("ETH_URL")
+		if len(url) == 0 {
+			//url = "http://192.168.100.126:18545"
+			url = "http://localhost:8545"
+		}
+		fmt.Println("eth url", url)
 		re, err := http.NewRequest("POST",
 			url,
 			bytes.NewBuffer(j))

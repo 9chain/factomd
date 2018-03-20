@@ -4,53 +4,53 @@
 	 <section id="explorer">
         <div class="row">
             <div class="columns"> 
-                <h1>Entry Block</h1>
+                <h1>记录块</h1>
                 <table>
                     <tbody>
                         <tr>
-                            <td>KeyMR:</td>
+                            <td>梅克尔树哈希:</td>
                             <td>{{.KeyMR}}</td>
                         </tr>
                         <tr>
-                            <td>Full Hash:</td>
+                            <td>哈希值:</td>
                             <td>{{.FullHash}}</td>
                         </tr>
                         <tr>
-                            <td>ChainID:</td>
+                            <td>链标识:</td>
                             <td><a id="factom-search-link" type="chainhead">{{.Header.ChainID}}</a></td>
                         </tr>
                         <tr>
-                            <td>Block Height:</td>
+                            <td>块高度:</td>
                             <td>{{.Header.DBHeight}}</td>
                         </tr>
                         <tr>
-                            <td>Previous Entry Block:</td>
+                            <td>前一个记录块:</td>
                             <td>
-                                Previous KeyMR     :   <a id="factom-search-link" type="eblock">{{.Header.PrevKeyMR}}</a><br />
-                                Previous Full Hash :   {{.Header.PrevFullHash}}
+                                前一个梅克尔树哈希     :   <a id="factom-search-link" type="eblock">{{.Header.PrevKeyMR}}</a><br />
+                                前一个哈希值 :   {{.Header.PrevFullHash}}
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <h3>Entries Contained in Block <small>{{.Header.EntryCount}} Entries</small></h3> 
+                <h3>块记录数 <small>{{.Header.EntryCount}}</small></h3>
                 {{range $i, $ele := .Entries}}
                 {{if eq $ele.Hash "Minute Marker"}}
                  <table id="search-table">
                     <tbody>
-                        <tr>
+                        <!--<tr>
                             <td>Minute Marker</td>
                             <td>{{$ele.ChainID}}</td>
-                        </tr>
+                        </tr>-->
                     </tbody>
                 </table>
                 {{else}}
         		 <table id="search-table">
                 	<tbody>
                 		<tr>
-                			<td>Entry Hash:</td>
+                			<td>记录哈希:</td>
                 			<td><a id="factom-search-link" type="entry">{{$ele.Hash}}</a></td>
                 		</tr>
-                		<tr>
+                		<!-- <tr>
                 			<td>External IDs:</td>
                 			<td>
 								<ul>
@@ -59,12 +59,12 @@
 							    {{ end }}
 							</ul>
                 			</td>
-                		</tr>
+                		</tr> -->
                 		<tr>
-  							<td>Content:</td>
+  							<td>内容:</td>
                             <td>
-                                <span id="entry-content-summary">Content Summary: <a><small>Show All</small></a><br />{{truncate $ele.Content}}</span>
-                                <span id="entry-content-body" style="display:none;">All Content: <a><small>Show Summary</small></a><br />{{$ele.Content}}</span>
+                                <span id="entry-content-summary">摘要信息: <a><small>详情</small></a><br />{{truncate $ele.Content}}</span>
+                                <span id="entry-content-body" style="display:none;">详细内容: <a><small>摘要</small></a><br />{{$ele.Content}}</span>
                             </td>
                 		</tr>
                 	</tbody>

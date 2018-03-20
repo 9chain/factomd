@@ -1,0 +1,41 @@
+{{define "anchor"}}
+	{{template "header"}}
+	<!-- Body -->
+	<section id="explorer">
+		<div class="row">
+			<div class="columns">
+				<h1>锚点数据</h1>
+				<table>
+					<tbody id="search-table">
+						<tr>
+							<td>锚点信息 :</td>
+							<td>
+								- Hash : {{.Hash}}
+                                <br />- Block Hash : {{.BlockHash}}
+                                <br />- Block Number : {{.BlockNumber}}
+                                <br />- From : {{.From}}
+                                <br />- To : {{.To}}
+                                <br />- Transaction Index : {{.TransactionIndex}}
+								<br />- Value : {{.Value}}
+								<br />- S : {{.S}}
+								<br />- R : {{.R}}
+								<br />- V : {{.V}}
+                                <br />- Gas : {{.Gas}}
+                                <br />- Gas Price : {{.GasPrice}}
+                                <br />- Nonce : {{.Nonce}}
+								<br />- Input : {{.Input}}
+
+
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<!-- End Body -->
+	{{template "scripts"}}
+	{{template "tools"}}
+	{{template "footer"}}
+{{end}}

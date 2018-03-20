@@ -107,7 +107,7 @@ table tr td:first-child, table tr th:first-child { padding-left: 1.5rem; width: 
 
 header + .row { margin-bottom: 32px; }
 
-#local table, #local table thead, #local table tbody, #local table tfoot { width: 770px; }
+#local table, #local table thead, #local table tbody, #local table tfoot { width: 350px; }
 #local table thead, #local table tbody, #local table tfoot { display: block; }
 #local thead th:first-child, #local tbody td:first-child, #local tfoot td:first-child { width: 134px; }
 #local thead th:nth-child(2), #local tbody td:nth-child(2), #local tfoot td:nth-child(2) { width: 80px; }
@@ -132,9 +132,9 @@ header + .row { margin-bottom: 32px; }
 #panFactoids thead th:nth-child(2), #panFactoids tbody td:nth-child(2) { width: 175px; }
 #panFactoids thead th:nth-child(3), #panFactoids tbody td:nth-child(3) { width: 160px; }
 #panFactoids thead th:nth-child(4), #panFactoids tbody td:nth-child(4) { width: 175px; }
-#panEntries thead th:first-child, #panEntries tbody td:first-child { width: 527px; }
-#panEntries thead th:nth-child(2), #panEntries tbody td:nth-child(2) { width: 527px; }
-#panEntries thead th:nth-child(3), #panEntries tbody td:nth-child(3) { width: 99px; }
+#panEntries thead th:first-child, #panEntries tbody td:first-child { width: 585px; }
+#panEntries thead th:nth-child(2), #panEntries tbody td:nth-child(2) { width: 585px; }
+#panEntries thead th:nth-child(3), #panEntries tbody td:nth-child(3) { width: 0px; }
 #panDirectoryBlock thead th:first-child, #panDirectoryBlock tbody td:first-child { width: 350px; }
 #panDirectoryBlock thead th:nth-child(2), #panDirectoryBlock tbody td:nth-child(2) { width: 803px; }
 #dataDump textarea {

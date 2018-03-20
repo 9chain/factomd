@@ -2,14 +2,14 @@
 <section id="transactions">
     <div class="row">
         <div class="columns">
-            <h1>Transactions &amp; Entries</h1>
+            <h1>记录</h1>
 			<ul class="tabs" data-tabs id="example-tabs">
-				<li class="tabs-title is-active"><a href="#panFactoids" aria-selected="true">Factoids<span id="recent-factoid-total">(0)</span></a></li>
-				<li class="tabs-title"><a href="#panEntries">Chain/Entry Commits <span id="recent-entry-total">(0)</span></a></li>
-                <li class="tabs-title"><a href="#panDirectoryBlock">Last Directory Block - <span id="recent-directory-block"></span></a></li>
+				<!--<li class="tabs-title is-active"><a href="#panFactoids" aria-selected="true">Factoids<span id="recent-factoid-total">(0)</span></a></li>-->
+				<li class="tabs-title is-active"><a href="#panEntries">提交记录 <span id="recent-entry-total">(0)</span></a></li>
+                <li class="tabs-title"><a href="#panDirectoryBlock">最新目录块 - <span id="recent-directory-block"></span></a></li>
 			</ul>
 			<div class="tabs-content" data-tabs-content="example-tabs">
-				<div class="tabs-panel is-active" id="panFactoids">
+                <!--<div class="tabs-panel is-active" id="panFactoids">
                 <table id="traxList">
                     <thead>
                         <tr>
@@ -20,17 +20,17 @@
                         </tr>
                     </thead>
                     <tbody>
-      
+
                     </tbody>
                 </table>
-				</div>
-				<div class="tabs-panel" id="panEntries">
+                </div>-->
+				<div class="tabs-panel is-active" id="panEntries">
                 <table id="traxList">
                     <thead>
                         <tr>
-                            <th>Entry Hash</th>
-                            <th>Chain ID</th>
-                            <th>EC Cost</th>
+                            <th>记录哈希</th>
+                            <th>链标识</th>
+                            <!--<th>EC Cost</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -42,28 +42,28 @@
                 <table id="traxList">
                     <thead>
                         <tr>
-                            <th colspan="2">Last Directory Block Information</th>
+                            <th colspan="2">最新目录块信息</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>KeyMR:</td>
+                            <td>梅克尔树哈希:</td>
                             <td id="DBKeyMR"><a id="factom-search-link" type="dblock"></a></td>
                         </tr>
                         <tr>
-                            <td>Body KeyMR:</td>
+                            <td>内容梅克尔树哈希:</td>
                             <td id="DBBodyKeyMR"></td>
                         </tr>
                         <tr>
-                            <td>Full Hash:</td>
+                            <td>哈希值:</td>
                             <td id="DBFullHash"></td>
                         </tr>
                         <tr>
-                            <td>Timestamp:</td>
+                            <td>时间戳:</td>
                             <td id="DBBlockTimestamp"></td>
                         </tr>
                         <tr>
-                            <td>Block Height:</td>
+                            <td>块高度:</td>
                             <td id="DBBlockHeight"></td>
                         </tr>
                     </tbody>

@@ -146,15 +146,14 @@ function updateTransactions() {
             if ($("#"+entry.Hash + " #chainID a").text() != "Processing") {
               $("#"+entry.Hash + " #entry-entryhash a").attr("type", "entry")
             }
-            if($("#"+entry.Hash + " #eccost").text() != entry.ECCost) {
-              $("#"+entry.Hash + " #eccost").text(entry.ECCost)
-            }
+            // if($("#"+entry.Hash + " #eccost").text() != entry.ECCost) {
+            //   $("#"+entry.Hash + " #eccost").text(entry.ECCost)
+            // }
           } else {
             $("#panEntries > #traxList > tbody").prepend("\
             <tr id='" + entry.Hash + "'>\
                 <td id='entry-entryhash'><a id='factom-search-link' type='entryack'>" + entry.Hash + "</a></td>\
                 <td id='chainID'><a id='factom-search-link' type='chainhead'>" + entry.chainid  + "</a></td>\
-                <td id='eccost'>" + entry.ECCost + "</td>\
             </tr>")
             if ($("#panEntries > #traxList > tbody > tr").length > 100) {
               $("#panEntries > #traxList > tbody >tr").last().remove();
@@ -175,8 +174,8 @@ function updateHeight() {
     myHeight = obj[0].Height
     lHeight = obj[1].Height
     compHeight = obj[2].Height
-    feds = obj[3].fed
-    auds = obj[3].aud
+    feds = 5 //obj[3].fed
+    auds = 5// obj[3].aud
     respFive = obj[4].length
 
     $("#serverfedcount").val(feds)
@@ -268,9 +267,9 @@ function updateAllPeers() {
           $("#" + peer.Hash).foundation()
         }
         if ($("#" + peer.Hash).find("#ip span").attr("title") != con.ConnectionNotes) {
-          element = $("#" + peer.Hash).find("#ip span") 
-          wich = $("has-tip").index(element); 
-          $(".tooltip").eq(wich).html(con.ConnectionNotes); 
+          element = $("#" + peer.Hash).find("#ip span")
+          wich = $("has-tip").index(element);
+          $(".tooltip").eq(wich).html(con.ConnectionNotes);
 
         }
         if ($("#" + peer.Hash).find("#connected").val() != con.ConnectionState) {
@@ -289,14 +288,14 @@ function updateAllPeers() {
           }
         }
 
-        if ($("#" + peer.Hash).find("#sent").val().length == 0 || $("#" + peer.Hash).find("#sent").val() != con.BytesSent) {
-          $("#" + peer.Hash).find("#sent").val(con.BytesSent) // Value
-          $("#" + peer.Hash).find("#sent").text(formatBytes(con.BytesSent, con.MessagesSent))
-        }
-        if ($("#" + peer.Hash).find("#received").val().length == 0 || $("#" + peer.Hash).find("#received").val() != con.BytesReceived) {
-          $("#" + peer.Hash).find("#received").val(con.BytesReceived) // Value
-          $("#" + peer.Hash).find("#received").text(formatBytes(con.BytesReceived, con.MessagesReceived))
-        }
+        // if ($("#" + peer.Hash).find("#sent").val().length == 0 || $("#" + peer.Hash).find("#sent").val() != con.BytesSent) {
+        //   $("#" + peer.Hash).find("#sent").val(con.BytesSent) // Value
+        //   $("#" + peer.Hash).find("#sent").text(formatBytes(con.BytesSent, con.MessagesSent))
+        // }
+        // if ($("#" + peer.Hash).find("#received").val().length == 0 || $("#" + peer.Hash).find("#received").val() != con.BytesReceived) {
+        //   $("#" + peer.Hash).find("#received").val(con.BytesReceived) // Value
+        //   $("#" + peer.Hash).find("#received").text(formatBytes(con.BytesReceived, con.MessagesReceived))
+        // }
         if ($("#" + peer.Hash).find("#momentconnected").val() != peer.ConnectionTimeFormatted) {
           $("#" + peer.Hash).find("#momentconnected").val(peer.ConnectionTimeFormatted) // Value
           $("#" + peer.Hash).find("#momentconnected").text(peer.ConnectionTimeFormatted)
@@ -311,9 +310,6 @@ function updateAllPeers() {
                   <td id='connected'></td>\
                   <td id='peerquality'></td>\
                   <td id='momentconnected'></td>\
-                  <td id='sent' value='-10'></td>\
-                  <td id='received' value='-10'></td>\
-                  <td><a id='disconnect' class='button tiny alert'>Disconnect</a></td>\
               </tr>")
             } else {
               $("#peerList > tbody").append("\
@@ -322,9 +318,6 @@ function updateAllPeers() {
                   <td id='connected'></td>\
                   <td id='peerquality'></td>\
                   <td id='momentconnected'></td>\
-                  <td id='sent' value='-10'></td>\
-                  <td id='received' value='-10'></td>\
-                  <td><a id='disconnect' class='button tiny alert'>Disconnect</a></td>\
               </tr>")
             }
         }
@@ -345,7 +338,7 @@ function updateAllPeers() {
         }
       }
     })
-  }) 
+  })
 }
 
 // Add listeners to disconnect buttons

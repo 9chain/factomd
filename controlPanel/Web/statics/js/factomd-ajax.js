@@ -94,6 +94,18 @@ $("body").on('mouseup',"section #factom-search-link",function(e) {
   x.open("POST", "./post")
   x.send(formDataLink)
 })
+$("body").on('mouseup',"section #factom-anchor-link",function(e) {
+    type = jQuery(this).attr("type")
+    hash = jQuery(this).text()
+    var x = new XMLHttpRequest()
+    x.onreadystatechange = function() {
+        if(x.readyState == 4) {
+            window.location = "search?input=" + hash + "&type=" + type
+        }
+    }
+    x.open("POST", "./post")
+    x.send()
+})
 
 // Redirect with post content
 function redirect(url, method, content) {

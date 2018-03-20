@@ -4,7 +4,7 @@
 	 <section id="explorer">
         <div class="row">
             <div class="columns"> 
-                <h1>Entry Credit Block</h1>
+                <h1>记录信用块</h1>
                 <table>
                     <tbody>
                         <tr>
@@ -27,7 +27,7 @@
                         </tr>
                     </tbody>
                 </table>
-                 <h3>Entries Contained in Entry Credit Block <small>{{.Length}} Entries</small></h3> 
+                 <h3>块记录数 <small>{{.Length}}</small></h3>
                  <table id="search-table">
                     <tbody>
                         {{range $i, $ele := .ECBlock.GetEntries}}
