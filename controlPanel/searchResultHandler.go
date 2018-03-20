@@ -20,6 +20,9 @@ import (
 	"github.com/FactomProject/factomd/wsapi"
 
 	"github.com/FactomProject/factomd/common/factoid"
+	"github.com/FactomProject/factomd/receipts"
+	"bytes"
+	"io/ioutil"
 )
 
 var _ = htemp.HTMLEscaper("sdf")
@@ -85,8 +88,120 @@ func HandleSearchResult(content *SearchedStruct, w http.ResponseWriter) {
 		if entry == nil {
 			break
 		}
+
+		receipt := getReceipt(content.Input)
+		if receipt != nil {
+			entry.TransactionHash, entry.BlockHash = receipt.BitcoinTransactionHash.String(), receipt.BitcoinBlockHash.String()
+		}
+
 		TemplateMutex.Lock()
 		err = templates.ExecuteTemplate(w, content.Type, entry)
+		TemplateMutex.Unlock()
+		return
+	case "anchor":
+		type JSON2Request struct {
+			JSONRPC string          `json:"jsonrpc"`
+			ID      interface{}     `json:"id"`
+			Params  json.RawMessage `json:"params,omitempty"`
+			Method  string          `json:"method,omitempty"`
+		}
+
+		//  {"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":[bitcointransactionhash],"id":1}
+		newJSON2Request := func(method string, id, params interface{}) *JSON2Request {
+			j := new(JSON2Request)
+			j.JSONRPC = "2.0"
+			j.ID = id
+			if b, err := json.Marshal(params); err == nil {
+				j.Params = b
+			}
+			j.Method = method
+			return j
+		}
+
+		params := [...]string{"0x" + content.Input}
+		req := newJSON2Request("eth_getTransactionByHash", 0, params)
+		j, err := json.Marshal(req)
+		if err != nil {
+			fmt.Println("get anchor info fail ", err)
+			break
+		}
+
+		url := "http://192.168.100.126:18545"
+		re, err := http.NewRequest("POST",
+			url,
+			bytes.NewBuffer(j))
+		if err != nil {
+			panic(err)
+		}
+
+		re.Header.Add("Content-Type", "application/json")
+
+		client := &http.Client{}
+		resp, err := client.Do(re)
+		if err != nil {
+			fmt.Println("get anchor info fail ", err)
+			break
+		}
+		defer resp.Body.Close()
+
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			fmt.Println("get anchor info fail ", err)
+			break
+		}
+
+		type JSONError struct {
+			Code    int         `json:"code"`
+			Message string      `json:"message"`
+			Data    interface{} `json:"data,omitempty"`
+		}
+
+		type JSON2Response struct {
+			JSONRPC string          `json:"jsonrpc"`
+			ID      interface{}     `json:"id"`
+			Error   *JSONError      `json:"error,omitempty"`
+			Result  json.RawMessage `json:"result,omitempty"`
+		}
+
+		jr := new(JSON2Response)
+		jr.JSONRPC = "2.0"
+
+		if err := json.Unmarshal(body, jr); err != nil {
+			fmt.Println("get anchor info fail ", err)
+			break
+		}
+
+		if jr.Error != nil {
+			fmt.Println("get anchor info fail ", jr.Error)
+			break
+		}
+
+		type ethResponse struct {
+			Hash string `json:"hash"`
+			Gas    string `json:"gas"`
+			From string `json:"from"`
+			To    string `json:"to"`
+			BlockNumber string `json:"blockNumber"`
+			BlockHash    string `json:"blockHash"`
+			Value string `json:"value"`
+			S    string `json:"s"`
+			R string `json:"r"`
+			V    string `json:"v"`
+			Input string `json:"input"`
+			Nonce    string `json:"nonce"`
+			TransactionIndex string `json:"transactionIndex"`
+			GasPrice string `json:"gasPrice"`
+		}
+		r := new(ethResponse)
+		if err := json.Unmarshal(jr.Result, r); err != nil {
+			fmt.Println("get anchor info fail ", err)
+			break
+		}
+
+		TemplateMutex.Lock()
+		fmt.Printf("anchor ----", r)
+
+		err = templates.ExecuteTemplate(w, content.Type, r)
 		TemplateMutex.Unlock()
 		return
 	case "chainhead":
@@ -702,6 +817,22 @@ type EntryHolder struct {
 	ECCost        string
 
 	Time string
+	TransactionHash	string
+	BlockHash		string
+}
+
+func getReceipt(hash string) *receipts.Receipt {
+	entryHash, err := primitives.HexToHash(hash)
+	if err != nil {
+		fmt.Println("--- get receipt", err)
+		return nil
+	}
+	dbase := StatePointer.GetAndLockDB()
+
+	receipt, err := receipts.CreateFullReceipt(dbase, entryHash)
+	StatePointer.UnlockDB()
+
+	return receipt
 }
 
 func getEntry(hash string) *EntryHolder {

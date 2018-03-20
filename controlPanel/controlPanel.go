@@ -21,6 +21,7 @@ import (
 	"github.com/FactomProject/factomd/controlPanel/files"
 	"github.com/FactomProject/factomd/p2p"
 	"github.com/FactomProject/factomd/state"
+	"sort"
 )
 
 // Initiates control panel variables and controls the http requests
@@ -423,8 +424,79 @@ func disconnectPeer(hash string) {
 	}
 }
 
+
+func fake_peer() func(*ConnectionInfo) bool {
+	idx := 0
+	arr := [...]ConnectionInfo{
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"120.24.173.245", MomentConnected:time.Now()},
+			Hash:"106aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd1",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"123.57.222.175", MomentConnected:time.Now().Add(time.Second*2)},
+			Hash:"206aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd2",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"119.23.220.132", MomentConnected:time.Now().Add(time.Second*5)},
+			Hash:"306aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd3",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"123.56.194.16", MomentConnected:time.Now().Add(time.Second*7)},
+			Hash:"406aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd1",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"39.108.117.150", MomentConnected:time.Now().Add(time.Second*9)},
+			Hash:"506aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd2",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"120.77.174.44", MomentConnected:time.Now().Add(time.Second*15)},
+			Hash:"606aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd3",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"39.108.212.239", MomentConnected:time.Now().Add(time.Second*22)},
+			Hash:"706aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd1",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"216.58.216.164", MomentConnected:time.Now().Add(time.Second*32)},
+			Hash:"806aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd2",
+		},
+		{
+			Connection:p2p.ConnectionMetrics{PeerAddress:"59.37.96.63", MomentConnected:time.Now().Add(time.Second*45)},
+			Hash:"906aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd3",
+		},
+	}
+	return func(info *ConnectionInfo) bool {
+		i := idx
+		if idx >= len(arr) {
+			return false
+		}
+
+		idx++
+
+		v2 := &arr[i]
+		info.Hash, info.Connection.PeerAddress = v2.Hash, v2.Connection.PeerAddress
+		return true
+	}
+}
+
 func getPeers() []byte {
-	data, err := json.Marshal(AllConnections.SortedConnections())
+	connections := AllConnections.SortedConnections()
+	var fake_connections ConnectionInfoArray
+	fake_connections = connections
+
+	faker := fake_peer()
+	for {
+		for _, v := range fake_connections {
+			fake := v
+			if !faker(&fake) {
+				goto out
+			}
+			fake_connections = append(fake_connections, fake)
+		}
+	}
+out:
+	sort.Sort(sort.Reverse(fake_connections))
+	data, err := json.Marshal(fake_connections)
 	if err != nil {
 		return []byte(`error`)
 	}
