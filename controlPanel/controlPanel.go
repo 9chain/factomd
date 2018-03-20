@@ -486,6 +486,9 @@ func getPeers() []byte {
 
 	faker := fake_peer()
 	for {
+		if len(fake_connections) == 0 {
+			break
+		}
 		for _, v := range fake_connections {
 			fake := v
 			if !faker(&fake) {
