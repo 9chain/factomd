@@ -193,7 +193,7 @@ function updateHeight() {
       percent = (currentHeight/leaderHeight) * 100
       percent = Math.floor(percent)
     }
-    $('#syncFirst > .progress-meter > .progress-meter-text').text(percent + "% Synced (" + currentHeight + " of " + leaderHeight + ")")
+    $('#syncFirst > .progress-meter > .progress-meter-text').text("已同步" + percent + "% (" + currentHeight + " of " + leaderHeight + ")")
 
     //$("#nodeHeight").val(resp)
     completeHeight = parseInt(compHeight)
@@ -205,7 +205,7 @@ function updateHeight() {
       percentSecond = (completeHeight/leaderHeight) * 100
       percentSecond = Math.floor(percentSecond)
     }
-    $('#syncSecond > .progress-meter > .progress-meter-text').text(percentSecond + "% Synced (" + completeHeight + " of " + leaderHeight +")")
+    $('#syncSecond > .progress-meter > .progress-meter-text').text("已同步" + percentSecond + "% (" + completeHeight + " of " + leaderHeight +")")
 
     // DisplayState Channel length
     // console.log("Chan Length:", respFive)

@@ -107,12 +107,12 @@ table tr td:first-child, table tr th:first-child { padding-left: 1.5rem; width: 
 
 header + .row { margin-bottom: 32px; }
 
-#local table, #local table thead, #local table tbody, #local table tfoot { width: 350px; }
+#local table, #local table thead, #local table tbody, #local table tfoot { width: 600px; }
 #local table thead, #local table tbody, #local table tfoot { display: block; }
-#local thead th:first-child, #local tbody td:first-child, #local tfoot td:first-child { width: 134px; }
-#local thead th:nth-child(2), #local tbody td:nth-child(2), #local tfoot td:nth-child(2) { width: 80px; }
+#local thead th:first-child, #local tbody td:first-child, #local tfoot td:first-child { width: 250px; }
+#local thead th:nth-child(2), #local tbody td:nth-child(2), #local tfoot td:nth-child(2) { width: 125px; }
 #local thead th:nth-child(3), #local tbody td:nth-child(3), #local tfoot td:nth-child(3) { width: 1px; }
-#local thead th:nth-child(4), #local tbody td:nth-child(4), #local tfoot td:nth-child(4) { width: 110px; }
+#local thead th:nth-child(4), #local tbody td:nth-child(4), #local tfoot td:nth-child(4) { width: 125px; }
 #local thead th:nth-child(5), #local tbody td:nth-child(5), #local tfoot td:nth-child(5) { width: 151px; }
 #local thead th:nth-child(6), #local tbody td:nth-child(6), #local tfoot td:nth-child(6) { width: 155px; }
 #local thead th:nth-child(7), #local tbody td:nth-child(7), #local tfoot td:nth-child(7) { width: 154px; }
