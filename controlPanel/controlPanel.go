@@ -429,35 +429,35 @@ var arr = [...]ConnectionInfo{
 		Hash:"106aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd1",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"123.57.222.175", MomentConnected:time.Now().Add(-time.Minute*5)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"123.57.222.175", MomentConnected:time.Now().AddDate(0,0,-2)},
 		Hash:"206aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd2",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"119.23.220.132", MomentConnected:time.Now().Add(-time.Hour*5)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"119.23.220.132", MomentConnected:time.Now().AddDate(0,0,-5)},
 		Hash:"306aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd3",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"123.56.194.16", MomentConnected:time.Now().Add(-time.Minute*15)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"123.56.194.16", MomentConnected:time.Now().AddDate(0,0,-4)},
 		Hash:"406aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd1",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"39.108.117.150", MomentConnected:time.Now().Add(-time.Second*9)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"39.108.117.150", MomentConnected:time.Now().AddDate(0,0,-2)},
 		Hash:"506aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd2",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"120.77.174.44", MomentConnected:time.Now().Add(-time.Minute*10)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"120.77.174.44", MomentConnected:time.Now().AddDate(0,0,-12)},
 		Hash:"606aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd3",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"39.108.212.239", MomentConnected:time.Now().Add(-time.Minute*60)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"39.108.212.239", MomentConnected:time.Now().Add(-time.Hour*60)},
 		Hash:"706aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd1",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"216.58.216.164", MomentConnected:time.Now().Add(-time.Second*600)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"216.58.216.164", MomentConnected:time.Now().AddDate(0,0,-1)},
 		Hash:"806aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd2",
 	},
 	{
-		Connection:p2p.ConnectionMetrics{PeerAddress:"59.37.96.63", MomentConnected:time.Now().Add(-time.Minute*85)},
+		Connection:p2p.ConnectionMetrics{PeerAddress:"59.37.96.63", MomentConnected:time.Now().AddDate(0,0,-8)},
 		Hash:"906aed40def99ba4b8c77eb2e3b002bf04437781e6385fbb7a877ef410c7cbd3",
 	},
 	{
