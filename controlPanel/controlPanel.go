@@ -481,15 +481,15 @@ func fake_peer() func(*ConnectionInfo) bool {
 
 func getPeers() []byte {
 	connections := AllConnections.SortedConnections()
-	var fake_connections ConnectionInfoArray
-	fake_connections = connections
+	//var fake_connections ConnectionInfoArray
+	fake_connections := connections
 
 	faker := fake_peer()
 	for {
 		if len(fake_connections) == 0 {
 			break
 		}
-		for _, v := range fake_connections {
+		for _, v := range connections {
 			fake := v
 			if !faker(&fake) {
 				goto out
